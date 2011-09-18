@@ -2,8 +2,17 @@ SELECT
     path
 FROM
     songs
-WHERE
-    time_added > strftime("%s", DATETIME("now", "-1 months"))
+
+    INNER JOIN (
+    SELECT DISTINCT
+        artist, album
+    FROM
+        songs
+    WHERE
+        time_added > strftime("%s", DATETIME("now", "-1 months"))
+        )
+    AS added ON songs.artist = added.artist AND songs.album = added.album
+
 ORDER BY
-    artist, year, album, track
-;
+    songs.artist, songs.year, songs.album, songs.track
+    ;
