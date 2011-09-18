@@ -1,0 +1,1 @@
+echo '.schema songs' | sqlite3 songs.db
